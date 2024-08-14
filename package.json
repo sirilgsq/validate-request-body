@@ -1,0 +1,9 @@
+{
+  "name": "@gsq/validate-request-body",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sirilgsq/validate-request-body",
+  "author": "sirilgsq",
+  "license": "MIT",
+  "private": true
+}
