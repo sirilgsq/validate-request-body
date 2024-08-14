@@ -98,10 +98,10 @@ Each rule in the `rules` array is an object with the following properties:
 You can create custom validation rules using the `customValidator` function:
 
 ```javascript
-const rules = [
+[
   {
     key: "username",
-    type: "string",
+    type: "custom-function",
     customValidator: (value) => {
       if (!/^[a-zA-Z0-9]+$/.test(value)) {
         return "Username should only contain alphanumeric characters";
