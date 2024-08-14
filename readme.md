@@ -23,26 +23,54 @@ yarn add  git+ssh://git@github.com/sirilgsq/validate-request-body.git
 First, require the middleware in your Express application:
 
 ```javascript
+//index.js
+
 const express = require("express");
-const validateRequestBody = require("your-package-name");
+const validateRequestBody = require("@gsq/validate-request-body");
+const createUserRules = require("../rules/create-user.rules");
 
 const app = express();
 app.use(express.json());
 
-const rules = [
-  { key: "name", type: "string", required: true, min: 3 },
-  { key: "age", type: "number", min: 18 },
-  { key: "email", type: "email", required: true },
-  { key: "customField", type: "custom-regex", regex: /^[A-Za-z0-9]+$/ },
-];
-
-app.post("/your-endpoint", validateRequestBody(rules), (req, res) => {
+app.post("/create-user", validateRequestBody(createUserRules), (req, res) => {
   res.send("Request is valid!");
 });
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+```
+
+```javascript
+//create-user.rules.js
+
+module.exports = [
+  {
+    key: "email",
+    type: "email",
+    required: true,
+  },
+  {
+    key: "first_name",
+    type: "string",
+    required: true,
+    min: 5,
+    max: 15,
+  },
+  {
+    key: "last_name",
+    type: "string",
+    required: false,
+    min: 5,
+    max: 15,
+  },
+  {
+    key: "roles",
+    type: "array",
+    required: true,
+    min: 1,
+  },
+];
 ```
 
 ## Rule Definition
